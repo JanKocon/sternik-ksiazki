@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import pl.sternik.jk.weekend.entities.Ksiazka;
 import pl.sternik.jk.weekend.entities.Moneta;
 import pl.sternik.jk.weekend.services.KlaserService;
 import pl.sternik.jk.weekend.services.NotificationService;
@@ -40,7 +41,7 @@ public class KlaserController {
 //    }
 
     @ModelAttribute("coinsAll")
-    public List<Moneta> populateCoins() {
+    public List<Ksiazka> populateCoins() {
         return this.klaserService.findAll();
     }
 

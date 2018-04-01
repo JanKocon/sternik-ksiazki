@@ -22,14 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pl.sternik.jk.weekend.entities.Ksiazka;
 import pl.sternik.jk.weekend.entities.Moneta;
+import pl.sternik.jk.weekend.entities.Stan;
 import pl.sternik.jk.weekend.entities.Status;
 import pl.sternik.jk.weekend.services.KlaserService;
 import pl.sternik.jk.weekend.services.NotificationService;
 import pl.sternik.jk.weekend.services.NotificationService.NotificationMessage;
 
 @Controller
-public class MonetyController {
+public class KsiazkaController {
 
     @Autowired
     // @Qualifier("spring-data")
@@ -41,8 +43,8 @@ public class MonetyController {
     private NotificationService notifyService;
 
     @ModelAttribute("statusyAll")
-    public List<Status> populateStatusy() {
-        return Arrays.asList(Status.ALL);
+    public List<Stan> populateStatusy() {
+        return Arrays.asList(Stan.ALL);
     }
     
     @ModelAttribute("MyMessages")
@@ -52,82 +54,82 @@ public class MonetyController {
     }
     
 
-    @GetMapping(value = "/monety/{id}")
+    @GetMapping(value = "/ksiazki/{id}")
     public String view(@PathVariable("id") Long id, final ModelMap model) {
-        Optional<Moneta> result;
+        Optional<Ksiazka> result;
         result = klaserService.findById(id);
         if (result.isPresent()) {
-            Moneta moneta = result.get();
-            model.addAttribute("moneta", moneta);
-            return "th/moneta";
+            Ksiazka ksiazka = result.get();
+            model.addAttribute("ksiazka", ksiazka);
+            return "th/ksiazka";
         } else {
-            notifyService.addErrorMessage("Cannot find moneta #" + id);
+            notifyService.addErrorMessage("Cannot find ksiazka #" + id);
             model.clear();
-            return "redirect:/monety";
+            return "redirect:/ksiazki";
         }
     }
 
-    @RequestMapping(value = "/monety/{id}/json", produces = "application/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/ksiazki/{id}/json", produces = "application/json", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Moneta> viewAsJson(@PathVariable("id") Long id, final ModelMap model) {
-        Optional<Moneta> result;
+    public ResponseEntity<Ksiazka> viewAsJson(@PathVariable("id") Long id, final ModelMap model) {
+        Optional<Ksiazka> result;
         result = klaserService.findById(id);
         if (result.isPresent()) {
-            Moneta moneta = result.get();
-            return new ResponseEntity<Moneta>(moneta, HttpStatus.OK);
+            Ksiazka ksiazka = result.get();
+            return new ResponseEntity<Ksiazka>(ksiazka, HttpStatus.OK);
         } else {
-            notifyService.addErrorMessage("Cannot find moneta #" + id);
+            notifyService.addErrorMessage("Cannot find ksiazka #" + id);
             model.clear();
-            return new ResponseEntity<Moneta>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Ksiazka>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value = "/monety", params = { "save" }, method = RequestMethod.POST)
-    public String saveMoneta(Moneta moneta, BindingResult bindingResult, ModelMap model) {
+    @RequestMapping(value = "/ksiazki", params = { "save" }, method = RequestMethod.POST)
+    public String saveKsiazka(Ksiazka ksiazka, BindingResult bindingResult, ModelMap model) {
         // @Valid
         if (bindingResult.hasErrors()) {
             notifyService.addErrorMessage("Please fill the form correctly!");
             model.addAttribute("MyMessages",  notifyService.getNotificationMessages());
-            return "th/moneta";
+            return "th/ksiazka";
         }
         
-        if (moneta.getStatus() == Status.NOWA) {
-            moneta.setStatus(Status.STARA);
+        if (ksiazka.getStatus() == Stan.NOWA) {
+            ksiazka.setStatus(Stan.UZYWANA);
         }
         
-        Optional<Moneta> result = klaserService.edit(moneta);
+        Optional<Ksiazka> result = klaserService.edit(ksiazka);
         if (result.isPresent())
             notifyService.addInfoMessage("Zapis udany");
         else
             notifyService.addErrorMessage("Zapis NIE udany");
         model.clear();
-        return "redirect:/monety";
+        return "redirect:/ksiazki";
     }
 
-    @RequestMapping(value = "/monety", params = { "create" }, method = RequestMethod.POST)
-    public String createMoneta(Moneta moneta, BindingResult bindingResult, ModelMap model) {
+    @RequestMapping(value = "/ksiazki", params = { "create" }, method = RequestMethod.POST)
+    public String createKsiazka(Ksiazka ksiazka, BindingResult bindingResult, ModelMap model) {
         if (bindingResult.hasErrors()) {
             notifyService.addErrorMessage("Please fill the form correctly!");
             model.addAttribute("MyMessages",  notifyService.getNotificationMessages());
-            return "th/moneta";
+            return "th/ksiazka";
         }
-        klaserService.create(moneta);
+        klaserService.create(ksiazka);
         model.clear();
         notifyService.addInfoMessage("Zapis nowej udany");
-        return "redirect:/monety";
+        return "redirect:/ksiazki";
     }
 
-    @RequestMapping(value = "/monety", params = { "remove" }, method = RequestMethod.POST)
-    public String removeRow(final Moneta moneta, final BindingResult bindingResult, final HttpServletRequest req) {
+    @RequestMapping(value = "/ksiazki", params = { "remove" }, method = RequestMethod.POST)
+    public String removeRow(final Ksiazka ksiazka, final BindingResult bindingResult, final HttpServletRequest req) {
         final Integer rowId = Integer.valueOf(req.getParameter("remove"));
         Optional<Boolean> result = klaserService.deleteById(rowId.longValue());
-        return "redirect:/monety";
+        return "redirect:/ksiazki";
     }
 
-    @RequestMapping(value = "/monety/create", method = RequestMethod.GET)
-    public String showMainPages(final Moneta moneta) {
+    @RequestMapping(value = "/ksiazki/create", method = RequestMethod.GET)
+    public String showMainPages(final Ksiazka ksiazka) {
         // Ustawiamy date nowej monety, na dole strony do dodania
-        moneta.setDataNabycia(Calendar.getInstance().getTime());
-        return "th/moneta";
+        ksiazka.setDataWydania(Calendar.getInstance().getTime());
+        return "th/ksiazka";
     }
 }
