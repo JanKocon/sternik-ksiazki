@@ -3,21 +3,22 @@ package pl.sternik.jk.weekend.services;
 import java.util.List;
 import java.util.Optional;
 
+import pl.sternik.jk.weekend.entities.Ksiazka;
 import pl.sternik.jk.weekend.entities.Moneta;
 
 
 public interface KlaserService {
-    List<Moneta> findAll();
+    List<Ksiazka> findAll();
 
-    List<Moneta> findAllToSell();
+    List<Ksiazka> findAllToSell();
 
-    Optional<Moneta> findById(Long id);
+    Optional<Ksiazka> findById(Long id);
 
-    Optional<Moneta> create(Moneta moneta);
+    Optional<Ksiazka> create(Ksiazka ksiazka);
 
-    Optional<Moneta> edit(Moneta moneta);
+    Optional<Ksiazka> edit(Ksiazka ksiazka);
 
     Optional<Boolean> deleteById(Long id);
 
-    List<Moneta> findLatest3();
+    List<Ksiazka> findLatest3();
 }

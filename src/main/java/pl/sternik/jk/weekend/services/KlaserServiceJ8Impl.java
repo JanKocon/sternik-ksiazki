@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import pl.sternik.jk.weekend.entities.Ksiazka;
 import pl.sternik.jk.weekend.entities.Moneta;
+import pl.sternik.jk.weekend.entities.Stan;
 import pl.sternik.jk.weekend.entities.Status;
-import pl.sternik.jk.weekend.repositories.MonetaAlreadyExistsException;
-import pl.sternik.jk.weekend.repositories.MonetyRepository;
-import pl.sternik.jk.weekend.repositories.NoSuchMonetaException;
+import pl.sternik.jk.weekend.repositories.*;
 
 
 @Service
@@ -23,36 +23,36 @@ public class KlaserServiceJ8Impl implements KlaserService {
 
     @Autowired
     @Qualifier("lista")
-    private MonetyRepository monety;
+    private KsiazkaRepository ksiazki;
 
     @Override
-    public List<Moneta> findAll() {
-        return monety.findAll();
+    public List<Ksiazka> findAll() {
+        return ksiazki.findAll();
     }
 
     @Override
-    public List<Moneta> findLatest3() {
-        return monety.findAll().stream().sorted((a, b) -> b.getDataNabycia().compareTo(a.getDataNabycia())).limit(5)
-                .collect(Collectors.toList());
+    public List<Ksiazka> findLatest3() {
+        // TODO
+        return null;
     }
 
     @Override
-    public Optional<Moneta> findById(Long id) {
+    public Optional<Ksiazka> findById(Long id) {
         try {
-            return Optional.of(monety.readById(id));
-        } catch (NoSuchMonetaException e) {
+            return Optional.of(ksiazki.readById(id));
+        } catch (NoSuchKsiazkaException e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public Optional<Moneta> create(Moneta moneta) {
+    public Optional<Ksiazka> create(Ksiazka ksiazka) {
         try {
-            return Optional.of(monety.create(moneta));
-        } catch (MonetaAlreadyExistsException e) {
+            return Optional.of(ksiazki.create(ksiazka));
+        } catch (KsiazkaAlreadyExistsException e) {
             try {
-                return Optional.of(monety.readById(moneta.getNumerKatalogowy()));
-            } catch (NoSuchMonetaException e1) {
+                return Optional.of(ksiazki.readById(ksiazka.getNumerKatalogowy()));
+            } catch (NoSuchKsiazkaException e1) {
                 return Optional.empty();
             }
         }
@@ -60,10 +60,10 @@ public class KlaserServiceJ8Impl implements KlaserService {
     }
 
     @Override
-    public Optional<Moneta> edit(Moneta moneta) {
+    public Optional<Ksiazka> edit(Ksiazka ksiazka) {
         try {
-            return Optional.of(monety.update(moneta));
-        } catch (NoSuchMonetaException e) {
+            return Optional.of(ksiazki.update(ksiazka));
+        } catch (NoSuchKsiazkaException e) {
             return Optional.empty();
         }
     }
@@ -71,16 +71,16 @@ public class KlaserServiceJ8Impl implements KlaserService {
     @Override
     public Optional<Boolean> deleteById(Long id) {
         try {
-            monety.deleteById(id);
+            ksiazki.deleteById(id);
             return Optional.of(Boolean.TRUE);
-        } catch (NoSuchMonetaException e) {
+        } catch (NoSuchKsiazkaException e) {
             return Optional.of(Boolean.FALSE);
         }
     }
 
     @Override
-    public List<Moneta> findAllToSell() {
-        return monety.findAll().stream().filter(p -> Objects.equals(p.getStatus(), Status.DO_SPRZEDANIA))
+    public List<Ksiazka> findAllToSell() {
+        return ksiazki.findAll().stream().filter(p -> Objects.equals(p.getStatus(), Stan.DO_SPRZEDANIA))
                 .collect(Collectors.toList());
     }
 }
