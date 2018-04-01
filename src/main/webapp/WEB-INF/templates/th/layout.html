@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="site-head">
+<title th:text="#{title.application}">Klaser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" media="all" href="../../../css/klaser.css" th:href="@{/css/klaser.css}" />
+  <link rel="icon" href="../../../imgages/bookIco.ico" th:href="@{/images/bookIco.ico}" />
+</head>
+<body>
+
+<logo th:fragment="site-logo">
+  <a href="index.html" th:href="@{/}"><img src="../../../images/logo.png" th:src="@{/images/logo.png}"/> </a>
+</logo>
+
+  <header th:fragment="site-header">
+    <nav>
+    <ul>
+      <li><a href="klaser.html" th:href="@{/monety}">Wszystkie książki</a></li>
+      <li><a href="tosell.html" th:href="@{/tosell}">Książki na sprzedaż</a></li>
+      <li><a href="moneta.html" th:href="@{/monety/create}">Dodaj książkę</a></li>
+      <li><a href="duplicates.html" th:href="@{/duplicates}">Duplikaty</a></li>
+    </ul>
+    </nav>
+    Zalogowany: <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b>  
+    <form th:action="@{/logout}" method="POST" style="display: inline">
+        <input type=submit class="link" value="Wyloguj"/>
+    </form>
+
+       
+    <ul id="messages">
+      <li th:each="msg : ${MyMessages}" th:text="${msg.text}"
+           th:class="${#strings.toLowerCase(msg.type)}">
+      </li>
+    </ul>
+  </header>
+
+  <div>
+    <h2 th:text="#{title.list}" style="display: inline;">Klaser monet</h2>    
+    <img src="../../../images/klaser.jpg" alt="Klaser logo" title="Klaser logo" th:src="@{/images/klaser.jpg}"
+      th:alt-title="#{title.application}" style="float: right;" /> 
+    <p> A tu jakis kontent, raczej sie nie pokaże </p>
+  </div>
+
+  <footer th:fragment="site-footer"> 
+  Jan Kocoń <a href="https://github.com/JanKocon/sternik-ksiazki"> Source code</a>
+  &copy; Sternik Klaser System, 2018 
+  </footer>
+
+</body>
+</html>
