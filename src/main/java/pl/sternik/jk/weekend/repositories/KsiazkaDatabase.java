@@ -30,7 +30,7 @@ public class KsiazkaDatabase implements KsiazkaRepository {
         baza[0] = k;
 
         k = new Ksiazka();
-        k.setNumerKatalogowy(2L);
+        k.setNumerKatalogowy(1L);
         k.setAutor("Kowal Jankowski");
         k.setCena(14.99);
         k.setDataWydania(KsiazkaUtils.getDateWithYearAndMonthForDay(2017,2,12));
@@ -38,8 +38,7 @@ public class KsiazkaDatabase implements KsiazkaRepository {
         k.setOpis("No książka do czytania");
         k.setStatus(Stan.NOWA);
         k.setTytul("Havana banana");
-        //??
-        baza[2] = k;
+        baza[1] = k;
 
     }
     public KsiazkaDatabase(int rozmiarBazy)

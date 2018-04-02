@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import pl.sternik.jk.weekend.entities.Ksiazka;
-import pl.sternik.jk.weekend.entities.Moneta;
 import pl.sternik.jk.weekend.entities.Stan;
-import pl.sternik.jk.weekend.entities.Status;
-import pl.sternik.jk.weekend.repositories.*;
+import pl.sternik.jk.weekend.repositories.KsiazkaAlreadyExistsException;
+import pl.sternik.jk.weekend.repositories.KsiazkaRepository;
+import pl.sternik.jk.weekend.repositories.NoSuchKsiazkaException;
 
 
 @Service
@@ -32,8 +32,8 @@ public class KlaserServiceJ8Impl implements KlaserService {
 
     @Override
     public List<Ksiazka> findLatest3() {
-        // TODO
-        return null;
+        return ksiazki.findAll().stream().sorted((a, b) -> b.getDataWydania().compareTo(a.getDataWydania())).limit(5)
+                .collect(Collectors.toList());
     }
 
     @Override

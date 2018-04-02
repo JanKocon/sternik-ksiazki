@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.sternik.jk.weekend.entities.Ksiazka;
-import pl.sternik.jk.weekend.entities.Moneta;
 import pl.sternik.jk.weekend.services.KlaserService;
 import pl.sternik.jk.weekend.services.NotificationService;
 
@@ -40,18 +39,18 @@ public class KlaserController {
 //        return Arrays.asList(Status.ALL);
 //    }
 
-    @ModelAttribute("coinsAll")
+    @ModelAttribute("booksAll")
     public List<Ksiazka> populateCoins() {
         return this.klaserService.findAll();
     }
 
 //    @ModelAttribute("coinsToSell")
-//    public List<Moneta> populateCoinsToSell() {
+//    public List<Ksiazka> populateCoinsToSell() {
 //        return this.klaserService.findAllToSell();
 //    }
 
 //    @ModelAttribute("coinsLast3")
-//    public List<Moneta> populateLast3Coins() {
+//    public List<Ksiazka> populateLast3Coins() {
 //        return this.klaserService.findLatest3();
 //    }
 
@@ -60,7 +59,7 @@ public class KlaserController {
         return "th/index";
     }
 
-    @RequestMapping(value = "/monety", method = RequestMethod.GET)
+    @RequestMapping(value = "/ksiazki", method = RequestMethod.GET)
     public String showMainPage(Model model) {
         model.addAttribute("MyMessages",  notificationService.getNotificationMessages());
         return "th/klaser";

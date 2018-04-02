@@ -23,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.sternik.jk.weekend.entities.Ksiazka;
-import pl.sternik.jk.weekend.entities.Moneta;
 import pl.sternik.jk.weekend.entities.Stan;
-import pl.sternik.jk.weekend.entities.Status;
 import pl.sternik.jk.weekend.services.KlaserService;
 import pl.sternik.jk.weekend.services.NotificationService;
 import pl.sternik.jk.weekend.services.NotificationService.NotificationMessage;
@@ -49,7 +47,6 @@ public class KsiazkaController {
     
     @ModelAttribute("MyMessages")
     public List<NotificationMessage> populateMessages() {
-        System.out.println("dupa");
         return notifyService.getNotificationMessages();
     }
     
@@ -109,7 +106,7 @@ public class KsiazkaController {
     @RequestMapping(value = "/ksiazki", params = { "create" }, method = RequestMethod.POST)
     public String createKsiazka(Ksiazka ksiazka, BindingResult bindingResult, ModelMap model) {
         if (bindingResult.hasErrors()) {
-            notifyService.addErrorMessage("Please fill the form correctly!");
+            notifyService.addErrorMessage("Wypełnij pola poprawnie");
             model.addAttribute("MyMessages",  notifyService.getNotificationMessages());
             return "th/ksiazka";
         }
@@ -128,7 +125,7 @@ public class KsiazkaController {
 
     @RequestMapping(value = "/ksiazki/create", method = RequestMethod.GET)
     public String showMainPages(final Ksiazka ksiazka) {
-        // Ustawiamy date nowej monety, na dole strony do dodania
+        // Ustawiamy date nowej ksiazki, na dole strony do dodania
         ksiazka.setDataWydania(Calendar.getInstance().getTime());
         return "th/ksiazka";
     }

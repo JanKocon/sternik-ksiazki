@@ -10,7 +10,7 @@
 	<context:annotation-config />
 
 	<!-- For defining Spring Bean -->
-	<context:component-scan base-package="pl.sternik.kk.weekend" />
+	<context:component-scan base-package="pl.sternik.jk.weekend" />
 
 	<!-- For bootstrapping the Spring Repository -->
 	<!-- <jpa:repositories base-package="pl.sternik.kk.weekend.repositories.springdata" /> -->

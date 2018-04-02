@@ -17,9 +17,9 @@
   <header th:fragment="site-header">
     <nav>
     <ul>
-      <li><a href="klaser.html" th:href="@{/monety}">Wszystkie książki</a></li>
+      <li><a href="klaser.html" th:href="@{/ksiazki}">Wszystkie książki</a></li>
       <li><a href="tosell.html" th:href="@{/tosell}">Książki na sprzedaż</a></li>
-      <li><a href="moneta.html" th:href="@{/monety/create}">Dodaj książkę</a></li>
+      <li><a href="ksiazka.html" th:href="@{/ksiazki/create}">Dodaj książkę</a></li>
       <li><a href="duplicates.html" th:href="@{/duplicates}">Duplikaty</a></li>
     </ul>
     </nav>
@@ -37,7 +37,7 @@
   </header>
 
   <div>
-    <h2 th:text="#{title.list}" style="display: inline;">Klaser monet</h2>    
+    <h2 th:text="#{title.list}" style="display: inline;">Klaser ksiazek</h2>
     <img src="../../../images/klaser.jpg" alt="Klaser logo" title="Klaser logo" th:src="@{/images/klaser.jpg}"
       th:alt-title="#{title.application}" style="float: right;" /> 
     <p> A tu jakis kontent, raczej sie nie pokaże </p>

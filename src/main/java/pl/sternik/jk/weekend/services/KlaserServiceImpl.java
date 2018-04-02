@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import pl.sternik.jk.weekend.entities.Ksiazka;
-import pl.sternik.jk.weekend.entities.Moneta;
-import pl.sternik.jk.weekend.repositories.*;
+import pl.sternik.jk.weekend.repositories.KsiazkaAlreadyExistsException;
+import pl.sternik.jk.weekend.repositories.KsiazkaRepository;
+import pl.sternik.jk.weekend.repositories.NoSuchKsiazkaException;
 
 
 @Service
@@ -71,6 +72,7 @@ public class KlaserServiceImpl implements KlaserService {
 
     @Override
     public List<Ksiazka> findLatest3() {
+        //TODO: 
         return Collections.emptyList();
     }
 

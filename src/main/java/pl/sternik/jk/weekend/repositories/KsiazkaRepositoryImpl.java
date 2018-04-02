@@ -1,15 +1,16 @@
 package pl.sternik.jk.weekend.repositories;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import pl.sternik.jk.weekend.entities.Ksiazka;
 import pl.sternik.jk.weekend.entities.Stan;
-import pl.sternik.jk.weekend.entities.Status;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+@Service
+@Qualifier("lista")
 public class KsiazkaRepositoryImpl implements KsiazkaRepository {
 
 

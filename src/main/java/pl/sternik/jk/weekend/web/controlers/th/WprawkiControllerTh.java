@@ -2,8 +2,6 @@ package pl.sternik.jk.weekend.web.controlers.th;
 
 import java.util.Date;
 
-import javax.ws.rs.HeaderParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pl.sternik.jk.weekend.entities.Moneta;
-import pl.sternik.jk.weekend.entities.Status;
-import pl.sternik.jk.weekend.repositories.MonetaAlreadyExistsException;
-import pl.sternik.jk.weekend.repositories.MonetyRepository;
-import pl.sternik.jk.weekend.repositories.NoSuchMonetaException;
+import pl.sternik.jk.weekend.entities.Ksiazka;
+import pl.sternik.jk.weekend.entities.Stan;
+import pl.sternik.jk.weekend.repositories.KsiazkaAlreadyExistsException;
+import pl.sternik.jk.weekend.repositories.KsiazkaRepository;
+import pl.sternik.jk.weekend.repositories.NoSuchKsiazkaException;
 
 
 
@@ -31,7 +29,7 @@ public class WprawkiControllerTh {
 
     @Autowired
     @Qualifier("tablica")
-    MonetyRepository baza;
+    KsiazkaRepository baza;
     
     @RequestMapping(path = "/wprawki-th", method = RequestMethod.GET)
     public String wprawki(ModelMap model) {
@@ -60,27 +58,27 @@ public class WprawkiControllerTh {
         return "Uzywasz przegladarki:=" + cosParam;
     }
     
-    @GetMapping(value = "/wprawki-th/monety/{id}/json", produces = "application/json")
+    @GetMapping(value = "/wprawki-th/ksiazki/{id}/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<Moneta> viewAsJson(@PathVariable("id") Long id, final ModelMap model) {
-        Moneta m;
+    public ResponseEntity<Ksiazka> viewAsJson(@PathVariable("id") Long id, final ModelMap model) {
+        Ksiazka m;
         try {
             m = baza.readById(id);
-            return new ResponseEntity<Moneta>(m, HttpStatus.OK);
+            return new ResponseEntity<Ksiazka>(m, HttpStatus.OK);
             
-        } catch (NoSuchMonetaException e) {
+        } catch (NoSuchKsiazkaException e) {
             System.out.println(e.getClass().getName());
-            m = new Moneta();
+            m = new Ksiazka();
             m.setNumerKatalogowy(id);
-            m.setKrajPochodzenia("Polska");
-            m.setStatus(Status.NOWA);
-            m.setNominal(10L);
+            m.setGatunek("Horror");
+            m.setStatus(Stan.NOWA);
+            m.setTytul("Sternik");
             try {
                 baza.create(m);
-            } catch (MonetaAlreadyExistsException e1) {
+            } catch (KsiazkaAlreadyExistsException e1) {
                 System.out.println(e1.getClass().getName());
             }
-            return new ResponseEntity<Moneta>(m, HttpStatus.CREATED);
+            return new ResponseEntity<Ksiazka>(m, HttpStatus.CREATED);
         }
     }
 
