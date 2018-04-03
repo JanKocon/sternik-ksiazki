@@ -28,7 +28,7 @@ import pl.sternik.jk.weekend.repositories.NoSuchKsiazkaException;
 public class WprawkiControllerTh {
 
     @Autowired
-    @Qualifier("tablica")
+    @Qualifier("lista")
     KsiazkaRepository baza;
     
     @RequestMapping(path = "/wprawki-th", method = RequestMethod.GET)

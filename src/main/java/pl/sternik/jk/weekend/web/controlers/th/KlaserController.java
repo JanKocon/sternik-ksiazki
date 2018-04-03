@@ -27,7 +27,7 @@ public class KlaserController {
 
     @Autowired
 //    @Qualifier("spring-data")
-    @Qualifier("tablica")
+    @Qualifier("lista")
 //    @Qualifier("lista")
     private KlaserService klaserService;
 
@@ -40,14 +40,19 @@ public class KlaserController {
 //    }
 
     @ModelAttribute("booksAll")
-    public List<Ksiazka> populateCoins() {
+    public List<Ksiazka> populateBooks() {
         return this.klaserService.findAll();
     }
 
-//    @ModelAttribute("coinsToSell")
-//    public List<Ksiazka> populateCoinsToSell() {
-//        return this.klaserService.findAllToSell();
-//    }
+    @ModelAttribute("booksToSell")
+    public List<Ksiazka> populateBooksToSell() {
+        return this.klaserService.findAllToSell();
+    }
+    @ModelAttribute("booksDuplicate")
+    public List<Ksiazka> populateBooksDuplicate() {
+        return this.klaserService.findAllduplicate();
+    }
+
 
 //    @ModelAttribute("coinsLast3")
 //    public List<Ksiazka> populateLast3Coins() {
@@ -68,6 +73,11 @@ public class KlaserController {
     @RequestMapping("/tosell")
     public String showToSellPage() {
         return "th/tosell";
+    }
+
+    @RequestMapping("/duplikat")
+    public String showDuplikatPage() {
+        return "th/duplikat";
     }
 
 }

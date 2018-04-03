@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="th/layout ::site-head">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<logo th:replace="th/layout :: site-logo" />
+<header th:replace="th/layout :: site-header" />
+
+
+<div class="listaKsiazek" th:unless="${#lists.isEmpty(booksDuplicate)}">
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{klaser.numerKatalogowy}">numerKatalogowy</th>
+            <th th:text="#{klaser.tytul}">tytul</th>
+            <th th:text="#{klaser.opis}">opis</th>
+            <th th:text="#{klaser.cena}">cena</th>
+            <th th:text="#{klaser.autor}">autor</th>
+            <th th:text="#{klaser.gatunek}">gatunek</th>
+            <th th:text="#{klaser.dataWydania}">dataWydania</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${booksDuplicate}">
+            <form action="#" th:action="@{/duplikat}" th:object="${ksiazka}" method="post">
+                <td th:text="${book.numerKatalogowy}">1</td>
+                <td th:text="${book.tytul}">Tekken</td>
+                <td th:text="${book.opis}">100</td>
+                <td th:text="${book.cena}">Long description</td>
+                <td th:text="${book.autor}">Janicek</td>
+                <td th:text="${book.gatunek}">PS4</td>
+                <td th:text="${{book.dataWydania}}">2016/08/08</td>
+
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<footer th:replace="th/layout :: site-footer" />
+
+</body>
+
+</html>

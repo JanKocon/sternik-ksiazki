@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface KlaserService {
     List<Ksiazka> findAll();
 
+    List<Ksiazka> findAllduplicate();
+
     List<Ksiazka> findAllToSell();
 
     Optional<Ksiazka> findById(Long id);

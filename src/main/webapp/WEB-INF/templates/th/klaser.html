@@ -40,7 +40,7 @@
         <td th:text="${book.cena}">369.9</td>
         <td th:text="${{book.autor}}">Maciek z Klanu</td>
         <td th:text="${{book.gatunek}}">Czytelny</td>
-        <td th:text="${book.dataWydania}">2011/13/01</td>
+        <td th:text="${{book.dataWydania}}">2011/13/01</td>
         <td th:text="#{${'klaser.status.' + book.status}}">Nowa</td>
         <td>
           <button type="submit" name="remove" th:value="${book.numerKatalogowy}"

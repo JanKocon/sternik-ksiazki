@@ -33,7 +33,7 @@ public class KsiazkaController {
 
     @Autowired
     // @Qualifier("spring-data")
-    @Qualifier("tablica")
+    @Qualifier("lista")
     // @Qualifier("lista")
     private KlaserService klaserService;
 
