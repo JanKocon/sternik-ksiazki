@@ -1,18 +1,12 @@
 package pl.sternik.jk.weekend.web.controlers.th;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,16 +22,10 @@ public class KlaserController {
     @Autowired
 //    @Qualifier("spring-data")
     @Qualifier("lista")
-//    @Qualifier("lista")
     private KlaserService klaserService;
 
     @Autowired
     private NotificationService notificationService;
-
-//    @ModelAttribute("statusyAll")
-//    public List<Status> populateStatusy() {
-//        return Arrays.asList(Status.ALL);
-//    }
 
     @ModelAttribute("booksAll")
     public List<Ksiazka> populateBooks() {

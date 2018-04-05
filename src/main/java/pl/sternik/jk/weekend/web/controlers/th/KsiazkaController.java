@@ -85,7 +85,7 @@ public class KsiazkaController {
     public String saveKsiazka(Ksiazka ksiazka, BindingResult bindingResult, ModelMap model) {
         // @Valid
         if (bindingResult.hasErrors()) {
-            notifyService.addErrorMessage("Please fill the form correctly!");
+            notifyService.addErrorMessage("Wypełnij pola poprawnie");
             model.addAttribute("MyMessages",  notifyService.getNotificationMessages());
             return "th/ksiazka";
         }
@@ -112,7 +112,7 @@ public class KsiazkaController {
         }
         klaserService.create(ksiazka);
         model.clear();
-        notifyService.addInfoMessage("Zapis nowej udany");
+        notifyService.addInfoMessage("Zapis książki udany");
         return "redirect:/ksiazki";
     }
 
