@@ -10,7 +10,9 @@
 <logo th:replace="th/layout :: site-logo" />
 <header th:replace="th/layout :: site-header" />
 
-
+<div>
+    <h2 th:text="#{title.duplikaty}" style="display: inline;">Książki duplikaty</h2>
+</div>
 <div class="listaKsiazek" th:unless="${#lists.isEmpty(booksDuplicate)}">
     <table>
         <thead>

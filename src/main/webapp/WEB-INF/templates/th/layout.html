@@ -23,10 +23,12 @@
       <li><a href="duplikat.html" th:href="@{/duplikat}">Duplikaty</a></li>
     </ul>
     </nav>
-    Zalogowany: <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b>  
+ <!--
+    Zalogowany: <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b>
     <form th:action="@{/logout}" method="POST" style="display: inline">
         <input type=submit class="link" value="Wyloguj"/>
     </form>
+ -->
 
        
     <ul id="messages">

@@ -9,7 +9,9 @@
 <body>
 <logo th:replace="th/layout :: site-logo" />
 <header th:replace="th/layout :: site-header" />
-
+<div>
+  <h2 th:text="#{title.tosell}" style="display: inline;">Książki na sprzedaż</h2>
+</div>
 
 <div class="listaKsiazek" th:unless="${#lists.isEmpty(booksToSell)}">
   <table>
