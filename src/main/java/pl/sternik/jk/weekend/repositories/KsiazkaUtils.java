@@ -2,6 +2,7 @@ package pl.sternik.jk.weekend.repositories;
 
 import pl.sternik.jk.weekend.entities.Ksiazka;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,6 +23,13 @@ public class KsiazkaUtils {
         for(int i=0;i<data.length;i++)
         {
             System.out.println(i + " : " + data[i]);
+        }
+    }
+    public static void showDatabase(ArrayList<Ksiazka> arrayList)
+    {
+        for(int i=0;i<arrayList.size();i++)
+        {
+            System.out.println(i + " : " + arrayList.get(i).toString());
         }
     }
 
