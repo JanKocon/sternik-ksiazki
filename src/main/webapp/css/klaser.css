@@ -18,6 +18,7 @@ body {
     height: 100%;
     color: white;
 }
+
 .background{
 	background-image: url('../../images/bg.png');
 	width: 100%;
@@ -69,7 +70,7 @@ body>logo>a>img, body>logo a{
 }
 nav{
 background-color: black;
-height: 50px;
+height: 40px;
 }
 nav ul{
 width: 1000px;
@@ -129,11 +130,18 @@ padding: 5px;
 margin: 10px 0;
 text-align: center;
 }
+body> p {
+width: 80%;
+background-color: black;
+padding: 5px;
+margin: 10px auto;
+text-align: justify;
+}
 
 
 ul#messages li {
 display: block;
-width: 80%;
+width: 100%;
 margin: 5px auto;
 text-align: center;
 padding: 5px;
@@ -141,12 +149,12 @@ border-radius: 5px;
 }
 
 ul#messages li.info {
-background: #7f7;
+background: black;
 }
 
 ul#messages li.error {
-background: #d00;
-color: white;
+background: black;
+color: red;
 }
 
 
@@ -212,7 +220,7 @@ form div > table th {
 
 form div.submit {
   margin-top: 40px;
-  background-color: #99cc33;
+  background-color: black;
   text-align: center;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -234,10 +242,17 @@ ul.errorlist {
     margin: 10px 10px 50px 10px;
     padding: 10px;
 }
-
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
 ul.errorlist li {
+    animation: blinker 2s linear infinite;
     list-style: none;
-    background-color: #f2d768;
+    background-color: black;
+    color: red;
+    text-align: center;
     padding: 5px;
     margin: 3px 0px;
 }
