@@ -1,1 +1,3 @@
-# Sternik
+# Sternik-weekend
+
+Projekt księgarni - Klaser
