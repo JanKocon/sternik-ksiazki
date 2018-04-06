@@ -1,6 +1,7 @@
 package pl.sternik.jk.weekend.repositories;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.sternik.jk.weekend.entities.Ksiazka;
 
@@ -10,8 +11,7 @@ import java.util.Date;
 
 public class KsiazkaUtils {
 
-    @Autowired
-    private static Logger logger;
+    private static Logger logger = LoggerFactory.getLogger(KsiazkaUtils.class);
     public static Date getDateWithYearAndMonthForDay(int year, int month, int day) {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
