@@ -1,5 +1,8 @@
 package pl.sternik.jk.weekend.heloo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -18,25 +21,27 @@ import javax.servlet.http.HttpSession;
 urlPatterns = { "/hello" })
 public class MyRESTFilter2 implements javax.servlet.Filter {
 
+    private static final Logger logger = LoggerFactory.getLogger(MyRESTFilter2.class);
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
         
-        System.out.println("--------------- 2222222 ---------------");
+        logger.info("--------------- 2222222 ---------------");
         
         chain.doFilter(req, res);
 
         HttpServletRequest r =  (HttpServletRequest) req;
         HttpSession session = r.getSession(true);
         if(session != null){
-            System.out.println("----Mam sesje!!!");
+            logger.info("----Mam sesje!!!");
             Enumeration<String> attributeNames = session.getAttributeNames();
             while(attributeNames.hasMoreElements())
-                System.out.println(attributeNames.nextElement());
+                logger.info(attributeNames.nextElement());
             session.putValue("ddd", "Kukuku");
         }
-        
-        System.out.println("--------------- 7777777 ---------------");
+
+        logger.info ("--------------- 7777777 ---------------");
     }
 
     @Override

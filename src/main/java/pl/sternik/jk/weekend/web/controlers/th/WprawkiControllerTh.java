@@ -67,7 +67,6 @@ public class WprawkiControllerTh {
             return new ResponseEntity<Ksiazka>(m, HttpStatus.OK);
             
         } catch (NoSuchKsiazkaException e) {
-            System.out.println(e.getClass().getName());
             m = new Ksiazka();
             m.setNumerKatalogowy(id);
             m.setGatunek("Horror");
@@ -76,7 +75,6 @@ public class WprawkiControllerTh {
             try {
                 baza.create(m);
             } catch (KsiazkaAlreadyExistsException e1) {
-                System.out.println(e1.getClass().getName());
             }
             return new ResponseEntity<Ksiazka>(m, HttpStatus.CREATED);
         }

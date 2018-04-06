@@ -4,12 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Description;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
@@ -22,6 +20,8 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Configuration
@@ -38,6 +38,13 @@ public class SpringWebConfig
             throws BeansException {
         this.applicationContext = applicationContext;
     }
+
+    @Bean
+    @Scope("prototype")
+    public Logger logger(InjectionPoint injectionPoint) {
+                Class<?> containingClass = injectionPoint.getField().getDeclaringClass();
+                return LoggerFactory.getLogger(containingClass);
+            }
 
     /* ******************************************************************* */
     /*  CONFIGURATION FOR JSP                                              */

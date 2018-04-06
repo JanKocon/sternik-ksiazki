@@ -1,9 +1,6 @@
 package pl.sternik.jk.weekend.web.controlers.th;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 //import javax.validation.Valid;
@@ -24,12 +21,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.sternik.jk.weekend.entities.Ksiazka;
 import pl.sternik.jk.weekend.entities.Stan;
+import pl.sternik.jk.weekend.repositories.KsiazkaUtils;
 import pl.sternik.jk.weekend.services.KlaserService;
 import pl.sternik.jk.weekend.services.NotificationService;
 import pl.sternik.jk.weekend.services.NotificationService.NotificationMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class KsiazkaController {
+    @Autowired
+    private Logger logger;
 
     @Autowired
     // @Qualifier("spring-data")
@@ -47,6 +49,7 @@ public class KsiazkaController {
     
     @ModelAttribute("MyMessages")
     public List<NotificationMessage> populateMessages() {
+        logger.info("Messagesy dej");
         return notifyService.getNotificationMessages();
     }
     
@@ -106,6 +109,7 @@ public class KsiazkaController {
     @RequestMapping(value = "/ksiazki", params = { "create" }, method = RequestMethod.POST)
     public String createKsiazka(Ksiazka ksiazka, BindingResult bindingResult, ModelMap model) {
         if (bindingResult.hasErrors()) {
+            logger.info("Create książka errors");
             notifyService.addErrorMessage("Wypełnij pola poprawnie");
             model.addAttribute("MyMessages",  notifyService.getNotificationMessages());
             return "th/ksiazka";

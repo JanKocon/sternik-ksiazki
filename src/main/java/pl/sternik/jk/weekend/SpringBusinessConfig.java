@@ -1,14 +1,12 @@
 package pl.sternik.jk.weekend;
 
 import javax.sql.DataSource;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ComponentScan(basePackages = { "pl.sternik.jk.weekend" }, excludeFilters = {
@@ -16,11 +14,10 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource({"classpath:/applicationContext.xml"})//,"classpath:/database-config.xml"})
 public class SpringBusinessConfig {
 
-/*    @Autowired
-    DataSource dataSource;
-
     @Bean
-    public JdbcTemplate getJdbcTemplate() {
-        return new JdbcTemplate(dataSource);
-    }*/
+    @Scope("prototype")
+    public Logger logger(InjectionPoint injectionPoint) {
+                Class<?> containingClass = injectionPoint.getField().getDeclaringClass();
+                return LoggerFactory.getLogger(containingClass);
+            }
 }

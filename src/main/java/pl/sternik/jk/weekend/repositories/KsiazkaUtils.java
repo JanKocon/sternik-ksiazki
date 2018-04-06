@@ -1,5 +1,7 @@
 package pl.sternik.jk.weekend.repositories;
 
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.sternik.jk.weekend.entities.Ksiazka;
 
 import java.util.ArrayList;
@@ -7,6 +9,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class KsiazkaUtils {
+
+    @Autowired
+    private static Logger logger;
     public static Date getDateWithYearAndMonthForDay(int year, int month, int day) {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
@@ -22,14 +27,14 @@ public class KsiazkaUtils {
     {
         for(int i=0;i<data.length;i++)
         {
-            System.out.println(i + " : " + data[i]);
+            logger.info(data[i].toString());
         }
     }
     public static void showDatabase(ArrayList<Ksiazka> arrayList)
     {
         for(int i=0;i<arrayList.size();i++)
         {
-            System.out.println(i + " : " + arrayList.get(i).toString());
+            logger.info(arrayList.get(i).toString());
         }
     }
 

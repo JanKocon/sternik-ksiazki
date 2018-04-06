@@ -1,6 +1,7 @@
 package pl.sternik.jk.weekend.repositories;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import pl.sternik.jk.weekend.entities.Ksiazka;
@@ -8,12 +9,16 @@ import pl.sternik.jk.weekend.entities.Stan;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Repository
 @Qualifier("tablica")
 public class KsiazkaDatabase implements KsiazkaRepository {
 //// TODO: zamienic tablice na liste
 
+    @Autowired
+    private Logger logger;
     Ksiazka[] baza;
     public KsiazkaDatabase()
     {
@@ -114,7 +119,7 @@ public class KsiazkaDatabase implements KsiazkaRepository {
     }
     private boolean sprawdzPoprawnoscNumeruKatalogowego(int numerKatalogowy) {
         if (numerKatalogowy < 0 || numerKatalogowy >= baza.length) {
-            System.out.println("Zły numer katalogowy");
+            logger.info("Numer katalogowy niepoprawny");
             return false;
         }
         return true;
